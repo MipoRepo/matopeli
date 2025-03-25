@@ -32,27 +32,19 @@ Tämä projekti vaatii seuraavat riippuvuudet ja työkalut:
    - Python 3.12+
    - Pygame 2.6.1
 
-**2. Riippuvuudet:**
-   - Asenna Python-projektin riippuvuudet:
-     ```bash
-     pip install -r requirements.txt
-     ```
-
-**3. Ympäristöasetukset:**
+**2. Ympäristöasetukset:**
    - Luo ja aktivoi virtuaaliympäristö:
      
-     **Windows:**
+     **bash:**
      ```bash
      python -m venv venv
      venv\Scripts\activate
      ```
-     **macOS / Linux:**
+     
+   - Asenna Python-projektin riippuvuudet:
      ```bash
-     python3 -m venv venv
-     source venv/bin/activate
+     pip install -r requirements.txt
      ```
-   - Luo `.env`-tiedosto ja määritä tarvittavat muuttujat projektin vaatimusten mukaisesti.
-
 ---
 
 ### License & Terms
