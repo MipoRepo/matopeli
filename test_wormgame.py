@@ -1,44 +1,30 @@
 # test_wormgame.py
-
-
-import pygame
-import random
+# Yksikkötestit matopelin tärkeimmille törmäystarkistuksille
 import pytest
+# Tarkistaa osuuko mato ruudun ulkopuolelle (seinään)
+def tormaako_seinaan(x, y, leveys, korkeus):
+    return x < 0 or x >= leveys or y < 0 or y >= korkeus
 
-# Pygame asetukset
-pygame.init()
+# Tarkistaa osuuko mato itseensä
+def tormaako_itseensa(mato_lista):
+    pää = mato_lista[-1] # pään koordinaatit
+    return pää in mato_lista[:-1] # Onko pää osa muuta matoa
 
-# Värit
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLACK = (0, 0, 0)
+# Testaa seinään törmäämistä:
+def test_tormaako_seinaan():
+    # Pitäisi törmätä: vasemmalta ulos, oikealta ulos, ylhäältä ulos, alhaalta ulos
+    assert tormaako_seinaan(-10, 50, 600, 400)
+    assert tormaako_seinaan(600, 100, 600, 400)
+    assert not tormaako_seinaan(100, 100, 600, 400)
 
-# Näytön asetukset
-WIDTH, HEIGHT = 600, 400
-CELL_SIZE = 20
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Matopeli")
-
-# Kello
-clock = pygame.time.Clock()
-
-# Matoluokka
-class Snake:
-    def __init__(self):
-        self.body = [(100, 100), (80, 100), (60, 100)]
-        self.direction = (CELL_SIZE, 0)
-
-    def move(self):
-        head = (self.body[0][0] + self.direction[0], self.body[0][1] + self.direction[1])
-        self.body.insert(0, head)
-        self.body.pop()
-
-    def grow(self):
-        self.body.append(self.body[-1])
-
-    def check_collision(self):
-        x, y = self.body[0]
+# Testaa itseensä törmäämistä:
+def test_tormaako_itseensa():
+    mato = [[100, 100], [110, 100], [120, 100], [130, 100], [120, 100]]
+    # Pitäisi törmätä: mato on törmännyt itseensä
+    mato2 = [[100, 100], [110, 100], [120, 100], [130, 100], [140, 100]]
+    #
+    assert tormaako_itseensa(mato)
+    assert not tormaako_itseensa(mato2)
         if x < 0 or x >= WIDTH or y < 0 or y >= HEIGHT or self.body[0] in self.body[1:]:
             return True
         return False
