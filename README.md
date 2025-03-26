@@ -1,4 +1,4 @@
-# Matopeli - CI/CD testausta
+# Matopeli - Testausta ja CI/CD
 
 Pieni Pythonilla tehty klassinen matopeli.  
 Toteutettu `pygame`-kirjastolla ja julkaistu `.exe`-muodossa automaattisesti GitHub Actionsin avulla.
