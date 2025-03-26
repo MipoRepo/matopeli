@@ -1,4 +1,4 @@
-# Matopeli
+# Matopeli - CI/CD testausta
 
 Pieni Pythonilla tehty klassinen matopeli.  
 Toteutettu `pygame`-kirjastolla ja julkaistu `.exe`-muodossa automaattisesti GitHub Actionsin avulla.
@@ -12,8 +12,6 @@ Toteutettu `pygame`-kirjastolla ja julkaistu `.exe`-muodossa automaattisesti Git
 ## Näyttökuva
 
 ![Matopeli-näyttökuva](pictures/screen.png)
-
-> Lisää `screenshots/matopeli.png`-kuvatiedosto projektiisi, jotta se näkyy GitHubissa.
 
 ---
 
@@ -64,8 +62,6 @@ pyinstaller --onefile matopeli.py
 ##  Kehittäjä
 
 [GitHub: MipoRepo](https://github.com/MipoRepo)
-
-Ota yhteyttä parannusehdotusten tai kysymysten osalta!
 
 ---
 
