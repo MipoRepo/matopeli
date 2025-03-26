@@ -4,6 +4,7 @@ Pieni Pythonilla tehty klassinen matopeli.
 Toteutettu `pygame`-kirjastolla ja julkaistu `.exe`-muodossa automaattisesti GitHub Actionsin avulla.
 
 [![Uusin versio](https://github.com/MipoRepo/matopeli/releases/tag/auto-latest)](https://github.com/MipoRepo/matopeli/releases)
+
 [![GitHub release](https://img.shields.io/github/v/tag/MipoRepo/matopeli?label=versio)](https://github.com/MipoRepo/matopeli/releases)
 
 ---
