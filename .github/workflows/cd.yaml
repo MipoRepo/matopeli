@@ -62,6 +62,6 @@ jobs:
         with:
           name: Julkaisu ${{ env.NEXT_TAG }}
           tag_name: ${{ env.NEXT_TAG }}
-          files: dist/matopeli.exe
+          files: dist/wormgame.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
