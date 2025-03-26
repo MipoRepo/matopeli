@@ -91,7 +91,7 @@ def peli():
                     y_muutos = mato_blokin_koko
                     x_muutos = 0
 
-        # Tarkistetaan reunat
+        # Tarkistetaan reunat, 
         if x >= leveys or x < 0 or y >= korkeus or y < 0:
             peli_loppu = True
 
