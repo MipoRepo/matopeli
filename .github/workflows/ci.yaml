@@ -25,4 +25,4 @@ jobs:
           pip install -r requirements.txt
       
       - name: Run pytest
-        run: matopeli/test_wormgame.py
+        run: test_wormgame.py
