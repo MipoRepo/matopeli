@@ -25,9 +25,9 @@ def test_tormaako_itseensa():
     #
     assert tormaako_itseensa(mato)
     assert not tormaako_itseensa(mato2)
-        if x < 0 or x >= WIDTH or y < 0 or y >= HEIGHT or self.body[0] in self.body[1:]:
-            return True
-        return False
+    if x < 0 or x >= WIDTH or y < 0 or y >= HEIGHT or self.body[0] in self.body[1:]:
+        return True
+    return False
 
     def change_direction(self, new_direction):
         if (new_direction[0] != -self.direction[0] and new_direction[1] != -self.direction[1]):
