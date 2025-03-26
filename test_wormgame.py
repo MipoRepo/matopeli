@@ -1,86 +1,54 @@
-# test_wormgame.py
-# Yksikkötestit matopelin tärkeimmille törmäystarkistuksille
 import pytest
-# Tarkistaa osuuko mato ruudun ulkopuolelle (seinään)
-def tormaako_seinaan(x, y, leveys, korkeus):
-    return x < 0 or x >= leveys or y < 0 or y >= korkeus
+from wormgame import Snake, Apple, WIDTH, HEIGHT, CELL_SIZE  # Muista, että pääkoodin tiedoston nimi on "wormgame.py"
 
-# Tarkistaa osuuko mato itseensä
-def tormaako_itseensa(mato_lista):
-    pää = mato_lista[-1] # pään koordinaatit
-    return pää in mato_lista[:-1] # Onko pää osa muuta matoa
+# Testaa Snake-luokan alustus
+def test_snake_initialization():
+    snake = Snake()
+    assert snake.body == [(100, 100), (80, 100), (60, 100)]
+    assert snake.direction == (CELL_SIZE, 0)
 
-# Testaa seinään törmäämistä:
-def test_tormaako_seinaan():
-    # Pitäisi törmätä: vasemmalta ulos, oikealta ulos, ylhäältä ulos, alhaalta ulos
-    assert tormaako_seinaan(-10, 50, 600, 400)
-    assert tormaako_seinaan(600, 100, 600, 400)
-    assert not tormaako_seinaan(100, 100, 600, 400)
-
-# Testaa itseensä törmäämistä:
-def test_tormaako_itseensa():
-    mato = [[100, 100], [110, 100], [120, 100], [130, 100], [120, 100]]
-    # Pitäisi törmätä: mato on törmännyt itseensä
-    mato2 = [[100, 100], [110, 100], [120, 100], [130, 100], [140, 100]]
-    #
-    assert tormaako_itseensa(mato)
-    assert not tormaako_itseensa(mato2)
-    if x < 0 or x >= WIDTH or y < 0 or y >= HEIGHT or self.body[0] in self.body[1:]:
-        return True
-    return False
-
-    def change_direction(self, new_direction):
-        if (new_direction[0] != -self.direction[0] and new_direction[1] != -self.direction[1]):
-            self.direction = new_direction
-
-    def draw(self, screen):
-        for segment in self.body:
-            pygame.draw.rect(screen, GREEN, (segment[0], segment[1], CELL_SIZE, CELL_SIZE))
-
-# Omenaluokka
-class Apple:
-    def __init__(self):
-        self.position = (random.randint(0, (WIDTH - CELL_SIZE) // CELL_SIZE) * CELL_SIZE,
-                         random.randint(0, (HEIGHT - CELL_SIZE) // CELL_SIZE) * CELL_SIZE)
-    
-    def respawn(self):
-        self.position = (random.randint(0, (WIDTH - CELL_SIZE) // CELL_SIZE) * CELL_SIZE,
-                         random.randint(0, (HEIGHT - CELL_SIZE) // CELL_SIZE) * CELL_SIZE)
-    
-    def draw(self, screen):
-        pygame.draw.rect(screen, RED, (self.position[0], self.position[1], CELL_SIZE, CELL_SIZE))
-
-# Pelisilmukka
-snake = Snake()
-apple = Apple()
-running = True
-while running:
-    screen.fill(BLACK)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                snake.change_direction((0, -CELL_SIZE))
-            elif event.key == pygame.K_DOWN:
-                snake.change_direction((0, CELL_SIZE))
-            elif event.key == pygame.K_LEFT:
-                snake.change_direction((-CELL_SIZE, 0))
-            elif event.key == pygame.K_RIGHT:
-                snake.change_direction((CELL_SIZE, 0))
-
+# Testaa Snake-luokan liikkuminen
+def test_snake_move():
+    snake = Snake()
     snake.move()
-    
-    if snake.body[0] == apple.position:
-        snake.grow()
-        apple.respawn()
+    assert snake.body[0] == (120, 100)  # Pään tulisi liikkua oikealle
+    assert snake.body[-1] == (80, 100)  # Hännän viimeinen segmentti katoaa
 
-    if snake.check_collision():
-        running = False
+# Testaa Snake-luokan kasvaminen
+def test_snake_grow():
+    snake = Snake()
+    initial_length = len(snake.body)
+    snake.grow()
+    assert len(snake.body) == initial_length + 1
+    assert snake.body[-1] == snake.body[-2]  # Viimeinen segmentti on kopio toiseksi viimeisestä
 
-    snake.draw(screen)
-    apple.draw(screen)
-    pygame.display.flip()
-    clock.tick(10)
+# Testaa Snake-luokan törmäystarkistus
+def test_snake_collision():
+    snake = Snake()
+    # Simuloidaan törmäys itseen
+    snake.body = [(100, 100), (80, 100), (100, 100)]
+    assert snake.check_collision() is True
 
-pygame.quit()
+    # Simuloidaan törmäys pelialueen ulkopuolelle
+    snake.body = [(WIDTH, 0)]
+    assert snake.check_collision() is True
+
+    # Ei törmäystä
+    snake.body = [(100, 100), (80, 100), (60, 100)]
+    assert snake.check_collision() is False
+
+# Testaa Apple-luokan sijainti
+def test_apple_spawn():
+    apple = Apple()
+    x, y = apple.position
+    assert 0 <= x < WIDTH
+    assert 0 <= y < HEIGHT
+    assert x % CELL_SIZE == 0
+    assert y % CELL_SIZE == 0
+
+# Testaa Apple-luokan uudelleensyntyminen
+def test_apple_respawn():
+    apple = Apple()
+    initial_position = apple.position
+    apple.respawn()
+    assert apple.position != initial_position  # Omenan sijainnin tulisi muuttua

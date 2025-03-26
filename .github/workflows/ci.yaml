@@ -1,4 +1,4 @@
-name: Matopeli CI
+name: wormgame CI
 
 on:
   push:
