@@ -3,15 +3,15 @@
 Pieni Pythonilla tehty klassinen matopeli.  
 Toteutettu `pygame`-kirjastolla ja julkaistu `.exe`-muodossa automaattisesti GitHub Actionsin avulla.
 
-[Lataa uusin versio](https://github.com/nilenos/super-matopeli/releases/tag/auto-latest)
+[Lataa uusin versio]([https://github.com/MipoRepo/matopeli/releases/tag/auto-latest](https://github.com/MipoRepo/matopeli/releases)
 
-[![GitHub release](https://img.shields.io/github/v/tag/nilenos/super-matopeli?label=versio)](https://github.com/nilenos/super-matopeli/releases)
+[![GitHub release](https://img.shields.io/github/v/tag/MipoRepo/matopeli?label=versio)](https://github.com/MipoRepo/matopeli/releases)
 
 ---
 
 ## Näyttökuva
 
-![Matopeli-näyttökuva](screenshots/matopeli.png)
+![Matopeli-näyttökuva](pictures/screen.png)
 
 > Lisää `screenshots/matopeli.png`-kuvatiedosto projektiisi, jotta se näkyy GitHubissa.
 
@@ -63,10 +63,10 @@ pyinstaller --onefile matopeli.py
 
 ##  Kehittäjä
 
-[GitHub: nilenos](https://github.com/nilenos)
+[GitHub: MipoRepo](https://github.com/MipoRepo)
 
 Ota yhteyttä parannusehdotusten tai kysymysten osalta!
 
 ---
 
-© 2025 Super Matopeli – avoin lähdekoodi MIT-lisenssillä
+© 2025 Matopeli – avoin lähdekoodi MIT-lisenssillä
